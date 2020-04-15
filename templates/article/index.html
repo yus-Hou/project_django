@@ -1,0 +1,175 @@
+{% extends 'base.html' %} {% load static %} {% load staticfiles %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block title %}
+    首页
+{% endblock %}
+{% block content %}
+    <style>
+        body{
+            color: #1b1e21;
+        }
+    </style>
+<div class="banner">
+		<div class="inner">
+			<h1 class="h1" >优选最新资讯及招聘动态</h1>
+
+		</div>
+		<div class="banner-btn">
+			<a href="{% url 'article:article_list' %}" class="btn btn-primary">更多精彩尽在社区</a>
+		</div>
+	</div>
+	<!-- 卡片栏 -->
+
+	<div class="content w">
+		<div class="cards">
+			<ul class="row">
+
+				<li class="col-4">
+					<h3 class="title">
+						<b>最新资讯</b>
+						<a href="#">more</a>
+						<div class="cards-text">
+							<p class="text-img">
+								<img src="{{ adminnews.avatar.url }}"  alt="..." width="284px" height="157px">
+							</p>
+							<p class="text-title">
+								<a href="{% url 'article:article_detail' adminnews.id  %}">
+                                    {{ adminnews.title }}
+                                </a>
+							</p>
+							<p class="text-show">
+								<a href="{% url 'article:article_detail' adminnews.id %}">
+									查看详情
+								</a>
+							</p>
+						</div>
+					</h3>
+				</li>
+				<li class="col-4">
+					<h3 class="title">
+						<b>当前最热</b>
+						<a href="{% url 'article:article_list' %}?order=total_views">more</a>
+						<div class="news-text">
+							<p class="text-img">
+								<img src="{{ hot.avatar.url }}"  alt="..." width="284px" height="157px">
+							</p>
+							<p class="text-title">
+								<a href="{% url 'article:article_detail' hot.id %}">
+									{{ hot.title }}
+								</a>
+							</p>
+							<p class="text-show">
+								<a href="{% url 'article:article_detail' hot.id %}">
+									查看详情
+								</a>
+							</p>
+						</div>
+					</h3>
+				</li>
+				<li class="col-4">
+					<h3 class="title">
+						<b>站点公告</b>
+						<a href="{% url 'article:article_list' %}?column=5">more</a>
+						<div class="news-text">
+							<p class="text-img">
+								<img src="{{ admincol.avatar.url }}"  alt="..." width="284px" height="157px">
+							</p>
+							<p class="text-title">
+								<a href="{% url 'article:article_detail' admincol.id%}">
+									{{ admincol.title }}
+								</a>
+							</p>
+							<p class="text-show">
+								<a href="{% url 'article:article_detail' admincol.id%}">
+									查看详情
+								</a>
+							</p>
+						</div>
+					</h3>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+
+
+	<div class="content-news w">
+		<ul class="clearfix">
+            {% for article in indexnews %}
+			<li class="clearfix">
+				<div class="news-img">
+					<a href="{% url 'article:article_detail' article.id%}">
+						<img src="{% if article.avatar %}
+						                {{ article.avatar.url }}
+						          {% else %}
+						                 {% static 'images/zwtp.jfif' %}
+						          {% endif %} " style="width: 284px; height: 157px;" >
+					</a>
+				</div>
+				<div class="text">
+					<div class="news-text">
+						<a href="{% url 'article:article_detail' article.id%}" class="first">
+							<p>
+								{{ article.title }}
+							</p>
+						</a>
+						<a href="{% url 'article:article_detail' article.id%}" class="second">
+							<p>
+								{{ article.content | slice:'50' }}...
+							</p>
+						</a>
+					</div>
+					<div class="news-info">
+						<p>
+							{{ article.author.profile.name }}
+						</p>
+						<em>·</em>
+						<span class="time">
+							{{ article.created | date:'Y-m-d' }}
+						</span>
+					</div>
+				</div>
+			</li>
+            {% endfor %}
+
+
+
+			<li class="clearfix">
+				<div class="news-img">
+					<a href="#">
+						<img src="{% static 'images/news3.jpg' %}" style="width: 284px; height: 157px;" >
+					</a>
+				</div>
+				<div class="text">
+					<div class="news-text">
+						<a href="#" class="first">
+							<p>
+								百万岗位虚位以待，全国首个城市网络招聘节在嘉兴开幕
+							</p>
+						</a>
+						<a href="#" class="second">
+							<p>
+								2月22日下午，由嘉兴市人民政府主办的“嘉兴万家企业百万岗位网络招聘节”正式启动。包括五芳斋等名企在内的上万家企业将为全国求职者在线提供超过一百万个就业岗位，通过网络搭台，用工双方实现“无接触高效招聘
+							</p>
+						</a>
+					</div>
+					<div class="news-info">
+						<p>
+							人民网-浙江频道
+						</p>
+						<em>·</em>
+						<span class="time">
+							2020-02-29
+						</span>
+					</div>
+				</div>
+			</li>
+
+
+		</ul>
+	</div>
+{% endblock %}

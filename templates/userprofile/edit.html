@@ -1,0 +1,244 @@
+{% extends "base.html" %} {% load staticfiles %}
+{% block title %} 用户信息 {% endblock title %}
+{% block content %}
+		<style type="text/css">
+			body {
+				background-color: #f6f6f8;
+
+				font-size: 16px;
+				color: #000;
+
+			}
+			h2 {
+				font-size: 22px;
+				font-weight: 400;
+				font-family: "microsoft yahei";
+				padding-top: 40px;
+				padding-bottom: 40px;
+			}
+
+			.form{
+				margin: 0 auto;
+                margin-top: 40px;
+                width: 1100px;
+                background-color: #f3f5f7;
+			}
+            h2{
+                padding-left: 50px;
+            }
+            textarea{
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+            form{
+                padding-left: 30px;
+            }
+			.form input{
+				height: 40px;
+				width: 300px;
+				border: 1px solid #eee;
+				border-radius: 5px ;
+				/* display: block */
+
+
+				font-size: 14px;
+				padding: 0;
+                padding-left: 10px;
+				margin: 20px;
+			}
+			.submit{
+				position: relative;
+				left: 580px;
+				background-color: #00BFFF;
+
+
+			}
+			.submit:hover{
+				border-color: #00BFFF;
+				background-color: #007BFF;
+				cursor: pointer;
+			}
+			.form span{
+				display: inline-block;
+				height: 30px;
+				width: 120px;
+				text-align: center;
+				line-height: 30px;
+				border-left: 5px solid #00BFFF;
+			}
+			.avatar{
+				display: inline-block;
+				background-color: #00BFFF;
+				border-radius: 5px;
+				height: 40px;
+				width: 100px;
+				position: absolute;
+				top: 50%;
+				left: 150px;
+				transform: translate(0, -50%);
+				text-align: center;
+				line-height: 40px;
+				font-size: 14px;
+
+			}
+			.avatar input{
+				position: absolute;
+				margin: 0;
+				width: 100px;
+				left: 0;
+			}
+			.school{
+				margin-bottom: 10px;
+			}
+			.intro{
+
+				width: 900px;
+			}
+			.skill{
+				width: 900px;
+				margin-top: 20px;
+			}
+        .form{
+
+        }
+		</style>
+
+
+
+		<div class="form ">
+			<h2>编辑个人信息</h2>
+			<form action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+				<div class="name">
+					<span>真实姓名：</span><input type="text" name="name" id="name" value="{{ profile.name }}"/>
+					<span>生日：</span><input type="text" name="birth" id="birth" value="{{ profile.birth }}"/>
+				</div>
+				<div class="school">
+					<span>毕业学校：</span><input type="text" name="school" id="school" value="{{ profile.school }}"/>
+					<span>联系电话：</span><input type="text" name="phone" id="phone" value="{{ profile.phone }}" /><b id="phone_link" style="color: darkred; font-size: 12px;"></b>
+
+				</div>
+
+
+
+                <div style="position: relative; height: 80px;">
+                    {% if profile.avatar %}
+
+                    <img src="{{ profile.avatar.url }}" style="width: 80px; height: 80px; border-radius: 50px; padding: 0; overflow: hidden; margin-left: 10px;
+                                                                    position: absolute; left: 350px; bottom: 0px;" class="col-md-4" alt="这是一张图片">
+                    {% else %}
+                    <h5>暂无头像</h5>
+                {% endif %}
+					<span class="avatar-span">上传头像：</span>
+                    <div class="avatar">点击选择图片<input type="file" name="avatar" id="avatar" style="opacity: 0;"/>
+                    </div>
+				</div>
+				<div>
+					<span>最高学历：</span><input type="text" name="education" id="education" value="{{ profile.education }}" />
+					<span>职业：</span><input type="text" name="profession" id="profession" value="{{ profile.profession }}" />
+				</div>
+				<div>
+					<span>现住址：</span><input type="text" name="address" id="address" value="{{ profile.address }}" />
+					<span>个人主页：</span><input type="text" name="homepage" id="homepage" value="{{ profile.homepage }}"/>
+				</div>
+				<div class="intro">
+					<span>个人描述：</span><textarea name="intro" id="intro" type="text" rows="4" class="form-control" aria-label="With textarea" >{{ profile.intro }}</textarea>
+				</div>
+				<div class="skill">
+					<span>技能：</span><textarea name="skill" id="skill" type="text" rows="4" class="form-control" aria-label="With textarea" >{{ profile.skill }}</textarea>
+				</div>
+				<div class="skill">
+					<span>工作经历：</span><textarea name="career" id="career" type="text" rows="4" class="form-control" aria-label="With textarea" >{{ profile.career }}</textarea>
+				</div>
+
+
+				<input type="submit" class="submit" name="" id="" value="完成" />
+			</form>
+		</div>
+{% block script %}
+    <script src="{% static 'jquery/jquery.min.js'%}"></script>
+    <script>
+        $(function(){
+            $('#phone').blur(function () {
+                $.ajax(
+                    {
+                        "url" : "{% url 'userprofile:check_phone' %}",
+
+                        'data': {
+                            'phone': $(this).val().trim()
+                        },
+
+                        'success': function (data) {
+                            $('#phone_link').html('');
+                            $('#phone_link').append(data.r_link)
+
+                        }
+
+                    }
+                )
+
+            })
+        })
+    </script>
+
+{% endblock script %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{##}
+{##}
+{##}
+{#<div class="container">#}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <br>#}
+{#            <div class="col-md-4">用户名: {{ user.username }}</div>#}
+{#            <br>#}
+{#            {% if profile.avatar %}#}
+{#                <div class="col-md-4">头像</div>#}
+{#                <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4" alt="这是一张图片">#}
+{#            {% else %}#}
+{#                <h5 class="col-md-4">暂无头像</h5>#}
+{#            {% endif %}#}
+{#                <br>#}
+{#                <br>#}
+{#            <form method="post" action="." enctype="multipart/form-data">#}
+{#                {% csrf_token %}#}
+{#                <div class="form-group">#}
+{#                    <label for="avatar" class="col-4">上传头像</label>#}
+{#                    <input type="file" class="form-control-file col-4" name="avatar" id="avatar" >#}
+{#                </div>#}
+{#                <!-- phone -->#}
+{#                <div class="form-group col-md-4">#}
+{#                    <label for="phone">电话</label>#}
+{#                    <input type="text" class="form-control" id="phone" name="phone" value="{{ profile.phone }}">#}
+{#                </div>#}
+{#                <!-- bio -->#}
+{#                <div class="form-group col-md-4">#}
+{#                    <label for="intro">简介</label>#}
+{#                    <textarea type="text" class="form-control" id="intro" name="intro" rows="12">{{ profile.intro }}</textarea>#}
+{#                </div>#}
+{#                <!-- 提交按钮 -->#}
+{#                <button type="submit" class="btn btn-primary">提交</button>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{% endblock content %}

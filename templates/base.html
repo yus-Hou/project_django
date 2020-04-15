@@ -1,0 +1,82 @@
+<!-- 载入静态文件 -->
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!-- 网站主语言 -->
+<html lang="zh-cn">
+
+<head>
+    <!-- 网站采用的字符编码 -->
+    <meta charset="utf-8">
+    <!-- 预留网站标题的位置 -->
+    <title>{% block title %}{% endblock %}</title>
+    <!-- 引入bootstrap的css文件 -->
+    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous">
+
+    {% block style %}
+    {% endblock style %}
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+		    padding: 0;
+		    font-size: 14px;
+		    font-family: "Microsoft YaHei", "SimSun";
+		    /* height: 8888px; */
+		    background: url({% static 'images/bg2.png'%}) no-repeat fixed center;
+
+        }
+        label{
+            color: #f3f5f7;
+        }
+          .w {
+        	width: 1200px;
+        	margin: 0 auto;
+        }
+
+        #wrapper {
+            min-height: 100%;
+            margin-bottom: -60px;
+        }
+
+        #footer,
+        #push {
+            height: 60px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 引入导航栏 -->
+    {% include 'header.html' %}
+    <div id="wrapper">
+        {% block content %}{% endblock content %}
+        <div id="push"></div>
+    </div>
+
+    <!-- 预留具体页面的位置 -->
+    {% comment %} <div id="wrapper"> {% endcomment %}
+
+    {% comment %} <div id="push"></div> {% endcomment %}
+    {% comment %} </div> {% endcomment %}
+
+    <!-- 引入注脚 -->
+    {% include 'footer.html' %}
+    <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <!--用于拼接js脚本-->
+    {% block script %}{% endblock script %}
+    {% include 'back_to_top_func.html' %}
+    <script src="{% static 'popper/popper.min.js' %}"></script>
+    <!-- 引入bootstrap的js文件 -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'layer/layer.js' %}"></script>
+</body>
+
+</html>

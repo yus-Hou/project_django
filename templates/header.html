@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+    {% load staticfiles %}
+    {% load notifications_tags %}
+    {% notifications_unread as unread_count %}
+    <meta charset="UTF-8">
+    <title>blog</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/base.css'%}"> -->
+    <style>
+        /* body {
+            background-color: #f3f5f7;
+        }
+        .myheader {
+            padding: 15px;
+        }
+        .navbar-left li a {
+            font-size: 14px;
+            margin: 0 5px 0 5px;
+
+        } */
+        		/*  */
+        .w {
+        	width: 1200px;
+        	margin: 0 auto;
+        }
+
+        header {
+		    height: 66px;
+		    background: url('{% static 'images/header.png'%}') repeat 0 -40px;
+		}
+
+		header .logo {
+		    float: left;
+		    margin-right: 40px;
+
+		}
+
+		header .nav {
+		    float: left;
+		}
+
+        header .nav ul li {
+            list-style-type: none;
+        }
+		header .nav ul li {
+		    float: left;
+		    width: 100px;
+		    line-height: 66px;
+		}
+
+
+	
+
+		header .nav ul li a {
+		    display: block;
+		    height: 66px;
+		    color: #343A40;
+            text-align: center;
+           
+		}
+
+		header .nav ul li .current {
+		    color: #007BFF;
+		    background-color: rgba(255, 255, 255, 0.3);
+		}
+
+		header .nav a {
+		    text-decoration: none;
+		}
+
+		header .nav ul a:hover {
+		    color: #0062CC;
+		    background-color: rgba(255, 255, 255, 0.3);
+		}
+
+		header .login {
+		    float: right;
+		    height: 58px;
+		    width: 200px;
+		    margin-top: 20px;
+		    margin-right: 20px;
+            position: relative;
+		}
+
+        .login ul li a:hover{
+            color: brown;
+        }
+        .inform {
+            position: absolute;
+            left: 0;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+
+
+        }
+        .inform a {
+            text-decoration: none;
+            padding: 0;
+            color: #fff;
+        }
+
+
+        .login-success {
+            width: 100px;
+            position: absolute;
+            left: 60px;
+
+        }
+
+        .login-no  a{
+            float: left;
+            font-size: 14px;
+            text-decoration: none;
+            color: #1b1e21;
+            margin-right: 10px;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+		<div class="w">
+			<div class="logo">
+				<img src="{% static 'images/logo-sm.png' %}" style=" height: 66px;" alt="...">
+			</div>
+		</div>
+		<div class="nav">
+			<ul>
+				<li><a href="{% url 'article:index' %}" class="current" id="index">首页</a></li>
+				<li><a href="{% url 'article:article_list' %}" class="" id="home">社区</a></li>
+
+				
+			</ul>
+		</div>
+		<div class="login">
+
+            <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    <div class="inform" style="margin-right: 10px;">
+                    <a  href="{% url 'notice:list' %}">通知</a>
+
+                    {% if unread_count %}
+                    <span class="badge badge-danger">{{ unread_count }}</span>
+                    {% endif %}
+                </div>
+                <!-- 如果用户已经登录，则显示用户名下拉框 -->
+                <li class="nav-item dropdown login-success" style="margin-left: 10px;">
+                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 14px; color: aliceblue;">
+
+                        {% if user.profile.name  %}
+                            {{ user.profile.name }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <span style="font-size: 12px;">(管理员)</span>
+                        {% endif %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href='{% url "userprofile:userpage" user.id %}'>个人信息</a>
+                        <a class="dropdown-item" href="{% url 'article:article_create' %}">发帖</a>
+                        <a class="dropdown-item" href="{% url 'userprofile:logout' %}">退出登录</a>
+                        <a class="dropdown-item" href="{% url 'notice:list' %}">通知</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item disabled" href="#">人才交流网</a>
+                    </div>
+
+
+
+
+
+
+
+
+                </li>
+                <!-- 如果用户未登录，则显示 “登录” -->
+                {% else %}
+                <li class="nav-item login-no ">
+                    <a class="nav-link btn btn-info " href="{% url 'userprofile:login' %}" style="width: 88px;">欢迎登录</a>
+                    <a class="nav-link btn btn-success " href="{% url 'userprofile:register' %}" style="width: 88px;">欢迎注册</a>
+                </li>
+
+
+
+                <!-- if 语句在这里结束 -->
+                {% endif %}
+            </ul>
+			
+		</div>
+	</header>
+
+    <script>
+        var index = document.getElementById("index");
+        var home = document.getElementById("home");
+
+        index.onclick = function(){
+            index.className = "current";
+        }
+    </script>
+
+</body>
+</html>

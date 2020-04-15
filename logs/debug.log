@@ -1,0 +1,11 @@
+WARNING 2020-04-05 17:13:08,780 log 9604 10112 Not Found: /favicon.ico
+WARNING 2020-04-05 19:33:38,893 log 1656 13752 Not Found: /article/images/header.png
+WARNING 2020-04-05 19:37:30,235 log 1656 8832 Not Found: /article/static/css/base.css
+WARNING 2020-04-05 19:37:30,316 log 1656 8832 Not Found: /article/static/images/header.png
+WARNING 2020-04-05 19:39:19,753 log 1656 12704 Not Found: /article/static/images/header.png
+WARNING 2020-04-05 19:39:50,034 log 1656 11048 Not Found: /article/static/images/header.png
+WARNING 2020-04-05 19:55:44,353 log 1656 11732 Not Found: /article/article_list/index.html
+WARNING 2020-04-05 21:04:55,542 log 1656 4912 Not Found: /article/article_update/images/bg2.png/
+WARNING 2020-04-05 21:05:06,563 log 1656 4912 Not Found: /article/article_update/images/bg2.png/
+WARNING 2020-04-05 21:05:13,671 log 1656 4912 Not Found: /article/article_update/images/bg2.png/
+WARNING 2020-04-05 22:44:45,687 log 1656 11836 Not Found: /article/article_list/index.html

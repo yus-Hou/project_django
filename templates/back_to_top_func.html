@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <style>
+    /* 按钮边框的大小、位置、样式 */
+    .toTop-arrow {
+
+        padding: 0;
+        margin: 0;
+        border: 0;
+        opacity: 0.7;
+        cursor: pointer;
+        position: fixed;
+        right: 1.5rem;
+        bottom: 4.5rem;
+        display: none;
+    }
+
+
+    /* 取消点击按钮时的聚焦 */
+    .toTop-arrow:focus {
+        outline: none;
+    }
+
+
+</style>
+</head>
+<body>
+
+    <div id="BackTop" class="toTop-arrow" style="z-index: 100;">
+        <img src="{% static '/images/rocket.png' %}" alt="" style="width: 45px; height: 70px;">
+    </div>
+<script>
+    // 向上滚动的函数
+    $(function () {
+        $('#BackTop').click(function () {
+            $('html,body').animate({scrollTop: 0}, 500);
+        });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+                $('#BackTop').fadeIn(300);
+            } else {
+                $('#BackTop').stop().fadeOut(300);
+            }
+        }).scroll();
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+{% load my_filters_and_tags %}
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    社区
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+<style>
+html, body {
+           
+            margin: 0;
+		    padding: 0;
+		    font-size: 14px;
+		    font-family: "Microsoft YaHei", "SimSun";
+		    /* height: 8888px; */
+		    background: url({% static 'images/bg2.png'%}) no-repeat fixed center;
+        }
+          .w {
+        	width: 1200px;
+        	margin: 0 auto;
+            background-color: #f6f6f8;
+            
+        }
+        .w p span {
+           {#color: #f3f5f7;#}
+        }
+        .page {
+            margin-top: 50px;
+        }
+        .hidden {
+            visibility: hidden;
+        }
+        .search {
+            float: right;
+        }
+        .main {
+            margin-top: 20px;
+            padding: 18px;
+            padding-bottom: 25px;
+        }
+
+        .hot{
+            margin-bottom: 40px;
+        }
+
+</style>
+<!-- 定义放置文章标题的div容器 -->
+<div class="w main" >
+    <nav aria-label="breadcrumb" class="hidden">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
+    <nav aria-label="breadcrumb" class="hot">
+            <ol class="breadcrumb ">
+                <li class="breadcrumb-item">
+                    {% if order == 'normal' %}
+                    <span >最新</span>
+                    {% else %}
+                    <a href="{% url 'article:article_list' %}?search={{ search }}&tag={{ tag }}&column={{ column }}">
+                        最新
+                    </a>
+                    {% endif %}
+                </li>
+                <li class="breadcrumb-item ">
+                    {% if order == 'total_views' %}
+                    <span style="font-size: 16px; color: #86cfda">最热</span>
+                    {% else %}
+                    <a href="{% url 'article:article_list' %}?search={{ search }}&tag={{ tag }}&column={{ column }}&order=total_views">
+                        最热
+                    </a>
+                    {% endif %}
+                </li>
+            </ol>
+    </nav>
+        
+        <div class="col-auto mr-auto search clearfix">
+            <form class="form-inline" >
+                <label class="sr-only"  for="search">content</label>
+                <input type="text"
+                    class="form-control mb-2 mr-sm-2"
+                    name="search"
+                    placeholder="搜索文章..."
+                    required
+                >
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+    
+
+        <!-- 搜索提示语 -->
+        {% if search %}
+            {% if articles %}
+                <h4 style="color: #000000;"><span style="color: red">"{{ search }}"</span>的搜索结果如下：</h4>
+                <hr>
+            {% else %}
+                <h4 style="color: #000000;">暂无<span style="color: red">"{{ search }}"</span>有关的文章。</h4>
+                <hr>
+            {% endif %}
+        {% endif %}
+    <div class="row mt-2">
+    {% for article in articles %}
+        <!-- 标题图 -->
+
+            <div class="col-3">
+                <img src="{% if article.avatar %}
+						        {{ article.avatar.url }}
+						  {% else %}
+						        {% static 'images/zwtp.jfif' %}
+						  {% endif %}"
+                     alt="..."
+                     style="width: 195px; height: 124px; "
+                >
+            </div>
+
+        <!-- 文章内容 -->
+        <div class="col">
+            <!-- 栏目 -->
+            {% if article.column %}
+                <a href="{% url 'article:article_list' %}?column={{ article.column.id }}"
+                    class="btn btn-sm mb-2
+                        {% if article.column.title == '公司招聘' %}
+                            btn-outline-success
+                        {% elif article.column.title == '站点公告' %}
+                            btn-danger
+                        {% elif article.column.title == '文娱天地' %}
+                            btn-outline-primary
+                        {% elif article.column.title == '面试经验' %}
+                            btn-outline-warning
+                        {% elif article.column.title == '内推信息' %}
+                            btn-outline-info
+                        {% elif article.column.title == 'python' %}
+                            btn-outline-secondary
+                        {% endif %}
+                    "
+                >
+                    {{ article.column }}
+
+                </a>
+            {% endif %}
+            <!-- 标签 -->
+            <span>
+                {% for tag in article.tags.all %}
+                <a href="{% url 'article:article_list' %}?tag={{tag}}" class="badge badge-secondary">
+                {{ tag }}
+                </a>
+                {% endfor %}
+            </span>
+            <!-- 标题 -->
+            <h4 >
+                <b>
+                    <a href="{% url 'article:article_detail' article.id %}">
+                        {{ article.title }}
+                    </a>
+                </b>
+            </h4>
+            <!-- 摘要 -->
+            <div>
+                <p style="color: #1b1e21;">
+                    {{ article.content|slice:'100' }}...
+                </p>
+            </div>
+            <!-- 注脚 -->
+            <p>
+                <!-- 附加信息 -->
+                <span style="color: #000;">
+                    <i class="fas fa-eye"></i>
+                    {{ article.total_views }} &nbsp;&nbsp;&nbsp;
+                </span>
+                <span style="color: #000;">
+                    <i class="fas fa-calendar-minus"></i>
+                    {{ article.created|date:'Y-m-d' }}&nbsp;&nbsp;&nbsp;
+                </span>
+                <span style="color: #000;">
+                    <i class="fas fa-comment" style="color: pink;"></i>
+                    {{ article.comments.count}} &nbsp;&nbsp;&nbsp;
+                </span>
+                <span style="color: #000;">
+                    <i class="fas fa-clock" style="color: #20c997;"></i>
+
+                        {{ article.update|timesince_zh }} 更新
+
+                </span>
+            </p>
+            <hr>
+        </div>
+
+        <hr style="width: 100%;"/>
+    {% endfor %}
+
+</div>
+<!-- 页码导航 -->
+
+<div class="pagination row position-static page">
+    <div class="m-auto">
+        <span class="step-links">
+            <!-- 如果不是第一页，则显示上翻按钮 -->
+            {% if articles.has_previous %}
+                <a href="?page=1&order={{ order }}&search={{ search }}&tag={{ tag }}&column={{ column }}" class="btn btn-success">
+                    &laquo; 1
+                </a>
+                <span>...</span>
+                <a href="?page={{ articles.previous_page_number  }}&order={{ order }}&search={{ search }}&tag={{ tag }}&column={{ column }}"
+                   class="btn btn-secondary"
+                >
+                    {{ articles.previous_page_number }}
+                </a>
+            {% endif %}
+
+            <!-- 当前页面 -->
+            <span class="current btn btn-danger btn-lg">
+                {{ articles.number }}
+            </span>
+
+            <!-- 如果不是最末页，则显示下翻按钮 -->
+            {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}&tag={{ tag }}&column={{ column }}"
+                   class="btn btn-secondary"
+                >
+                    {{ articles.next_page_number }}
+                </a>
+                <span>...</span>
+                <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}&tag={{ tag }}&column={{ column }}"
+                   class="btn btn-success"
+                >
+                    {{ articles.paginator.num_pages }} &raquo;
+                </a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+</div>
+{% endblock content %}
