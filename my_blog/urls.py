@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 import  notifications.urls
 
 from article.views import article_index
-from userprofile import views
+
 
 
 urlpatterns = [

@@ -1,10 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-#引入内置信号
-from django.db.models.signals import post_save
-#引入信号接收器的装饰器
-from django.dispatch import receiver
-# Create your models here.
+
 
 
 class Profile(models.Model):
@@ -43,13 +39,4 @@ class Profile(models.Model):
 
         verbose_name = '用户信息'
 
-#信号接收函数，每当新建User时自动调用
-# @receiver(post_save, sender = User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user= instance)
-#
-# @receiver(post_save, sender= User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
 

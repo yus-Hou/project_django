@@ -36,7 +36,11 @@
         <div class="col " style="font-size: 16px">
             <h1 class="col-12 mt-4 mb-4" style="padding-bottom: 20px">{{ article.title }}</h1>
             <div class="col-12 alert alert-success">
-                <a href="/userprofile/userpage/{{ article.author.id }}" style="text-decoration: none; padding-right: 5px">作者：{{ article.author.profile.name }}</a>
+                <a href="/userprofile/userpage/{{ article.author.id }}" style="text-decoration: none; padding-right: 5px">作者：{% if article.author.profile.name %}
+												 {{ article.author.profile.name }}
+											         {% else%}
+												{{ article.author.username }}
+											         {% endif %}</a>
             {% if user == article.author %}
 
 
@@ -49,9 +53,20 @@
                 <button type="submit">发送</button>
             </form>
             <a href="{% url 'article:article_update' article.id %}" style="text-decoration: none">编辑文章</a>
+	{% elif user.is_staff %}
+            <a href="#" onclick="confirm_delete()" style="text-decoration: none">删除文章</a>
+            <form action="{% url 'article:article_safe_delete' article.id %}"
+                  id="safe_delete"
+                  method="post"
+                  style="display: none">
+                {% csrf_token %}
+                <button type="submit">发送</button>
+            </form>
             {% endif %}
+            
+
             <div style="margin-top: 10px;">
-            浏览：{{ article.total_views }}
+            浏览量：{{ article.total_views }}
             </div>
             </div>
 
@@ -131,9 +146,23 @@
             <p>
                 <strong style="color: #007BFF; font-size: 16px ">
 
-                    <a href="/userprofile/userpage/{{ comment.user.id }}" style="text-decoration: none;">
-                        <img src="{{ comment.user.profile.avatar.url }}" alt="..." style="width: 30px; height: 30px; border-radius: 15px;">
-                        {{ comment.user.profile.name }}
+                    <a href="/userprofile/userpage/{{ comment.user.id }}" style="text-decoration: none; color: #1b1e21">
+                        <img src="
+                                {% if comment.user.profile.avatar %}
+                                    {{ comment.user.profile.avatar.url }}
+                                {% else %}
+                                    {% static 'images/zwtx.jfif'%}
+                                {% endif %}
+                                 " alt="..." style="width: 30px; height: 30px; border-radius: 15px;">
+
+                        {% if comment.user.profile.name  %}
+                            {{ comment.user.profile.name }}
+                        {% else %}
+                            {{ comment.user.username }}
+                        {% endif %}
+                        {% if comment.user.is_staff %}
+                            <span style="font-size: 8px; color: rosybrown">(管理员)</span>
+                        {% endif %}
                     </a>
                 </strong>
 
@@ -142,9 +171,24 @@
                            style="color: cornflowerblue; margin: 0 5px"
                         ></i>
                 <strong style="font-size: 16px">
-                    <a href="/userprofile/userpage/{{ comment.reply_to.id }}" style="text-decoration: none; ">
+                    <a href="/userprofile/userpage/{{ comment.reply_to.id }}" style="text-decoration: none; color: #1b1e21">
 
-                        {{ comment.reply_to }}
+                        <img src="
+                                {% if comment.reply_to.profile.avatar %}
+                                    {{ comment.reply_to.profile.avatar.url }}
+                                {% else %}
+                                    {% static 'images/zwtx.jfif'%}
+                                {% endif %}
+                                    " alt="..." style="width: 30px; height: 30px; border-radius: 15px;">
+
+                        {% if comment.reply_to.profile.name  %}
+                            {{ comment.reply_to.profile.name }}
+                        {% else %}
+                            {{ comment.reply_to.username }}
+                        {% endif %}
+                        {% if comment.reply_to.is_staff %}
+                            <span style="font-size: 10px; color: rosybrown">(管理员)</span>
+                        {% endif %}
 
                     </a>
                 </strong>
@@ -170,7 +214,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg" role = 'document'>
                     <div class="modal-content" style="height: 480px">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">回复{{ comment.user }}:</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">回复{{ comment.user.profile.name }}:</h5>
 
                         </div>
                         <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
@@ -187,18 +231,7 @@
         {% endrecursetree %}
 
 
-{#        {% for comment in comments %}#}
-{#            <hr>#}
-{#            <p>#}
-{#                <strong style="color: pink">#}
-{#                    {{ comment.user }}#}
-{#                </strong> 于#}
-{#                <span style="color: green">#}
-{#                    {{ comment.created|date:"Y-m-d H:i:s" }}#}
-{#                </span> 时说：#}
-{#            </p>#}
-{#            <pre style="font-family: inherit; font-size: 1em;"> {{ comment.content|safe }}</pre>#}
-{#        {% endfor %}#}
+
         </div>
     </div>
 

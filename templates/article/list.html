@@ -126,7 +126,7 @@ html, body {
             {% if article.column %}
                 <a href="{% url 'article:article_list' %}?column={{ article.column.id }}"
                     class="btn btn-sm mb-2
-                        {% if article.column.title == '公司招聘' %}
+                        {% if article.column.title == '学习记录' %}
                             btn-outline-success
                         {% elif article.column.title == '站点公告' %}
                             btn-danger

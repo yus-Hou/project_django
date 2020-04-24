@@ -136,7 +136,7 @@ SIMPLEUI_CONFIG = {
         'name': '权限认证',
         'icon': 'fas fa-user-shield',
         'models': [{
-            'name': '用户管理',
+            'name': '用户权限认证',
             'icon': 'fa fa-user',
             'url': 'auth/user/'
         }]
@@ -149,7 +149,7 @@ SIMPLEUI_CONFIG = {
             'url': 'article/article',
             'icon': 'fas fa-newspaper'
         },{
-            'name' : '文章栏目',
+            'name' : '文章专栏',
             'url' : 'article/articlecolumn',
             'icon' : 'fas fa-columns',
         }],
@@ -173,7 +173,7 @@ SIMPLEUI_CONFIG = {
             'icon':'',
             'models' : [{
                 'name' : '用户信息',
-                'url' : 'auth/user',
+                'url' : 'userprofile/profile',
                 'icon' :'',
             }]
 
@@ -222,13 +222,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'article.context_processor.show_avatar',
+
 
 
             ],
-            'libraries' : {
-                'mytags' : 'article.templatetags.my_filters_and_tags',
-            }
+
         },
     },
 ]
@@ -345,4 +343,4 @@ EMAIL_PORT = 25
 # 是否使用 TLS
 EMAIL_USE_TLS = True
 # 默认的发件人
-DEFAULT_FROM_EMAIL = 'Hys的个人博客 <1174935071@qq.com>'
+DEFAULT_FROM_EMAIL = 'Hys的论坛 <1174935071@qq.com>'

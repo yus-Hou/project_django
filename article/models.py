@@ -9,7 +9,7 @@ from PIL import Image
 # Create your models here.
 
 class ArticleColumn(models.Model):
-    #栏目标题
+    #专栏标题
     title = models.CharField(max_length=100, blank=True)
     #创建时间
     created= models.DateTimeField(default=timezone.now)
@@ -18,7 +18,7 @@ class ArticleColumn(models.Model):
         return self.title
 
     class Meta:
-        verbose_name_plural = '栏目'
+        verbose_name_plural = '专栏'
 
 #博客文章
 class Article(models.Model):

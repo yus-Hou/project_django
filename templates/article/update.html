@@ -4,21 +4,23 @@
 
 <style>
     label{
-        color: #fff;
+        color: #000;
         font-size: 16px;
     }
     .w form div{
         margin-bottom: 25px;
+       
     }
+    .u-main{background-color:#fff; padding:0 20px 20px 20px;margin-top:30px;}
 </style>
-<div class="w">
+<div class="w u-main">
         <div class="col-12">
             <br>
             <form method="post" action="." enctype="multipart/form-data">
                 {% csrf_token %}
                  <!-- 文章标签-->
                 <div class="form-group">
-                    <label for="tags" style="color:#fff">标签</label>
+                    <label for="tags" style="color:#000">标签</label>
                     <input type="text" class="form-control col-3" id="tags" name="tags" value="{{ tags }}">
                 </div>
                 <!--文章标题-->

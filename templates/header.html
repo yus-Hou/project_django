@@ -31,12 +31,13 @@
         header {
 		    height: 66px;
 		    background: url('{% static 'images/header.png'%}') repeat 0 -40px;
+		    color:#000;
 		}
 
 		header .logo {
 		    float: left;
 		    margin-right: 40px;
-
+			
 		}
 
 		header .nav {
@@ -63,10 +64,7 @@
            
 		}
 
-		header .nav ul li .current {
-		    color: #007BFF;
-		    background-color: rgba(255, 255, 255, 0.3);
-		}
+
 
 		header .nav a {
 		    text-decoration: none;
@@ -81,7 +79,7 @@
 		    float: right;
 		    height: 58px;
 		    width: 200px;
-		    margin-top: 20px;
+		    margin-top: 14px;
 		    margin-right: 20px;
             position: relative;
 		}
@@ -120,6 +118,12 @@
             margin-right: 10px;
 
         }
+        .inform a:hover{
+            color: brown;
+        }
+        .login ul li:hover{
+            color: brown;
+        }
     </style>
 </head>
 <body>
@@ -141,7 +145,7 @@
 
             <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
-                    <div class="inform" style="margin-right: 10px;">
+                    <div class="inform" style="margin-right: 10px; color:#000;">
                     <a  href="{% url 'notice:list' %}">通知</a>
 
                     {% if unread_count %}
@@ -149,10 +153,14 @@
                     {% endif %}
                 </div>
                 <!-- 如果用户已经登录，则显示用户名下拉框 -->
-                <li class="nav-item dropdown login-success" style="margin-left: 10px;">
+                <li class="nav-item dropdown login-success" style="margin-left: 10px; ">
                     <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 14px; color: aliceblue;">
-
+                        <img src="{% if user.profile.avatar %}
+                                    {{ user.profile.avatar.url }}
+                                {% else %}
+                                    {% static 'images/zwtx.jfif'%}
+                                {% endif %}" alt="..." style="width: 30px; height: 30px; border-radius: 15px;">
                         {% if user.profile.name  %}
                             {{ user.profile.name }}
                         {% else %}
@@ -168,7 +176,7 @@
                         <a class="dropdown-item" href="{% url 'userprofile:logout' %}">退出登录</a>
                         <a class="dropdown-item" href="{% url 'notice:list' %}">通知</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item disabled" href="#">人才交流网</a>
+                            <a class="dropdown-item disabled" href="#">Hys的博客</a>
                     </div>
 
 

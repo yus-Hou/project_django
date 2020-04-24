@@ -9,15 +9,19 @@ from .models import Profile
 
 #定义一个行内admin
 class ProfileInLine(admin.StackedInline):
-    model = Profile
-    can_delete = False
-    verbose_name_plural = 'UserProfile'
+     model = Profile
+     can_delete = False
+     verbose_name_plural = 'UserProfile'
 
-#将Profile 关联到User中
+
+
 class UserAdmin(BaseUserAdmin):
-    inlines = (ProfileInLine,)
+
+    list_display = ('username', 'email', 'is_active', 'date_joined', 'is_staff')
 
 
 #重新注册User
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+admin.site.register(Profile)

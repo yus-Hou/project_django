@@ -57,9 +57,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -88,13 +88,13 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\DjangoProject\my_blog\static\images" />
-      <recent name="E:\DjangoProject\my_blog\static\userprofile" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\DjangoProject\my_blog\templates\article" />
       <recent name="E:\DjangoProject\my_blog\static" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\DjangoProject\my_blog\static\images" />
+      <recent name="E:\DjangoProject\my_blog\static\userprofile" />
     </key>
   </component>
   <component name="RunManager" selected="Python.txt1">
@@ -183,6 +183,10 @@
       <workItem from="1586747047526" duration="35473000" />
       <workItem from="1586834277012" duration="26985000" />
       <workItem from="1586916175897" duration="18642000" />
+      <workItem from="1587008926269" duration="2496000" />
+      <workItem from="1587105441271" duration="7542000" />
+      <workItem from="1587181488203" duration="6072000" />
+      <workItem from="1587375723114" duration="144000" />
     </task>
     <servers />
   </component>
@@ -199,6 +203,10 @@
     </state>
     <state x="226" y="20" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1584102407482" />
     <state x="226" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1586599560432" />
+    <state x="413" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587009162697">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="413" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.768@0.0.1366.768" timestamp="1587009162697" />
     <state x="506" y="127" key="EnvironmentVariablesDialog" timestamp="1586599559138">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -228,15 +236,19 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="713" y="7" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1584266141889" />
-    <state x="705" y="198" key="com.intellij.ide.util.TipDialog" timestamp="1586916179547">
+    <state x="705" y="198" key="com.intellij.ide.util.TipDialog" timestamp="1587375792866">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="705" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584693246952" />
-    <state x="705" y="198" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1586916179547" />
+    <state x="705" y="198" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1587375792866" />
     <state x="290" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586919919389">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="290" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.768@0.0.1366.768" timestamp="1586919919389" />
+    <state x="241" y="0" width="520" height="747" key="dock-window-1" timestamp="1587375925624">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="241" y="0" width="520" height="747" key="dock-window-1/0.0.1366.768@0.0.1366.768" timestamp="1587375925624" />
     <state x="421" y="69" width="672" height="713" key="search.everywhere.popup" timestamp="1586863394411">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

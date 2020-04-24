@@ -92,9 +92,9 @@
 
                 <!-- 文章栏目 -->
                  <div class="form-group">
-                    <label for="column">栏目</label>
+                    <label for="column">专栏</label>
                     <select class="form-control" id="column" name="column" style="margin-left: 10px;">
-                    <option value="none" >请选择栏目..</option>
+                    <option value="none" >请选择专栏..</option>
                     {% if user.is_staff %}
                         {% for column in admincols %}
                         <option value="{{ column.id }}" >{{ column }}</option>
