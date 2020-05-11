@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%x#u%3slfv*v53rrmg6=2zgffdq3ensa_iaclxh#d($6(luckl'
+SECRET_KEY = '%x#u%3slfv*v53rrmg6=2zgffdq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -119,7 +119,7 @@ INSTALLED_APPS = [
 #simple基本配置
 SIMPLEUI_HOME_QUICK = False
 SIMPLEUI_HOME_INFO = False
-SIMPLEUI_HOME_TITLE = '人才交流网'
+SIMPLEUI_HOME_TITLE = 'blog'
 
 
 import time
@@ -337,7 +337,7 @@ EMAIL_HOST = 'smtp.qq.com'
 
 EMAIL_HOST_USER = '1174935071@qq.com'
 # 邮箱授权码
-EMAIL_HOST_PASSWORD = 'iljncsgjragujcjb'
+EMAIL_HOST_PASSWORD = 'iljncsgj'
 # 发送邮件的端口
 EMAIL_PORT = 25
 # 是否使用 TLS
